@@ -1,0 +1,12 @@
+name: Keep API Alive
+
+on:
+  schedule:
+    - cron: "*/1 * * * *" # Ping API setiap 1 menit
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping API
+        run: curl -I https://your-api.vercel.app/api/webhook
