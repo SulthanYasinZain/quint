@@ -1,18 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { RequestBody } from "../types";
 
-interface Event {
-  replyToken: string;
-  message: {
-    type: string;
-    text: string;
-  };
-}
-
-interface RequestBody {
-  events: Event[];
-}
-
-// Next.js App Router expects this exact export name
 export async function POST(req: NextRequest) {
   try {
     const body: RequestBody = await req.json();
@@ -66,9 +54,4 @@ async function replyMessage(replyToken: string, text: string) {
     console.error("Error sending reply:", error);
     return false;
   }
-}
-
-// This is optional but helps handle preflight requests
-export async function OPTIONS() {
-  return NextResponse.json({}, { status: 200 });
 }
