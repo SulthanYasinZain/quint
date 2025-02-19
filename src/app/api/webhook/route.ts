@@ -18,12 +18,15 @@ export async function POST(req: NextRequest) {
 
     const { replyToken, message } = events[0];
     if (message?.type === "text" && message.text === "!date") {
+      console.log("message Terdeteksi" + message.text);
       getDate(replyToken);
     }
     if (message?.type === "text" && message.text === "!test") {
+      console.log("message Terdeteksi" + message.text);
       getTest(replyToken);
     }
     if (message?.type === "text" && message.text === "!rawtest") {
+      console.log("message Terdeteksi" + message.text);
       replyMessage(replyToken, `Ini Test dari rawtest`);
     }
 
@@ -36,3 +39,7 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+export const config = {
+  runtime: "edge",
+};
