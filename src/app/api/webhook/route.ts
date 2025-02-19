@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { RequestBody } from "../types";
-import { replyMessage } from "@/lib/replyMessage";
 import getDate from "@/lib/getDate";
 
 export async function POST(req: NextRequest) {
