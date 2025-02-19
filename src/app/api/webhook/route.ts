@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { RequestBody } from "../types";
 import { replyMessage } from "@/lib/replyMessage";
+import getDate from "@/lib/getDate";
+
 export async function POST(req: NextRequest) {
   try {
     const body: RequestBody = await req.json();
@@ -15,11 +17,9 @@ export async function POST(req: NextRequest) {
 
     const { replyToken, message } = events[0];
     if (message?.type === "text" && message.text === "!date") {
-      const today = new Date().toLocaleDateString("id-ID");
-      await replyMessage(replyToken, `Hari ini: ${today}`);
+      getDate(replyToken);
     }
 
-    // LINE expects a 200 response quickly
     return NextResponse.json({ message: "Event processed" });
   } catch (error) {
     console.error("Error processing webhook:", error);
