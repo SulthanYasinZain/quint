@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { RequestBody } from "../types";
 import getDate from "@/lib/getDate";
+import getTest from "@/lib/getTest";
+import { replyMessage } from "@/lib/replyMessage";
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,6 +19,12 @@ export async function POST(req: NextRequest) {
     const { replyToken, message } = events[0];
     if (message?.type === "text" && message.text === "!date") {
       getDate(replyToken);
+    }
+    if (message?.type === "text" && message.text === "!test") {
+      getTest(replyToken);
+    }
+    if (message?.type === "text" && message.text === "!rawtest") {
+      replyMessage(replyToken, `Ini Test dari rawtest`);
     }
 
     return NextResponse.json({ message: "Event processed" });
